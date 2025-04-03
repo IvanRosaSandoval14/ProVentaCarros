@@ -19,9 +19,16 @@
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.ImgProducto)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ImgProducto)
+
+
+        <dd class="col-sm-10">
+            @if (!string.IsNullOrWhiteSpace(Model.ImgProducto))
+            {
+                <img src="@Model.ImgProducto" style="width:75px" />
+            }
         </dd>
+
+
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Compatiblilidad)
         </dt>

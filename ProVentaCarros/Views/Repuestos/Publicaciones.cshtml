@@ -1,0 +1,39 @@
+﻿@model IEnumerable<ProVentaCarros.Models.Repuesto>
+
+@{
+    ViewData["Title"] = "Repuestos Disponibles";
+}
+
+<h1>Repuestos Disponibles</h1>
+
+<div class="catalog-container">
+    @foreach (var item in Model)
+    {
+        <div class="catalog-item">
+            <div class="catalog-image">
+                @if (!string.IsNullOrWhiteSpace(item.ImgProducto))
+                {
+                    <img src="@item.ImgProducto" alt="@item.NombreRepuesto" />
+                }
+                else
+                {
+                    <img src="~/images/no-image.png" alt="Sin imagen" />
+                }
+            </div>
+            <div class="catalog-details">
+                <h3>@item.NombreRepuesto</h3>
+                <p><strong>Descripción:</strong> @item.DescripcionR</p>
+                <p><strong>Compatibilidad:</strong> @item.Compatiblilidad</p>
+                <p><strong>Proveniencia:</strong> @item.Proveniencia</p>
+                <p><strong>Estado:</strong> @item.EstadoRp</p>
+                <p><strong>Precio:</strong> @item.Precio</p>
+                <p><strong>Disponibilidad:</strong> @item.Disponibilidad</p>
+                <p><strong>Departamento:</strong> @item.IdDepartamentoNavigation.Id</p>
+                <p><strong>Vendedor:</strong> @item.IdVendedorNavigation.Nombre</p>
+                <p><strong>Comentario:</strong> @item.ComentarioR</p>
+                <p><strong>Fecha de registro:</strong> @item.FechaRp</p>
+                <p><strong>Actividad:</strong> @item.Actividad</p>
+            </div>
+        </div>
+    }
+</div>

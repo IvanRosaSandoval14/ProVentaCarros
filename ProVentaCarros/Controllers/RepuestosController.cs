@@ -12,10 +12,12 @@ namespace ProVentaCarros.Controllers
     public class RepuestosController : Controller
     {
         private readonly ProVentacarProyectContext _context;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public RepuestosController(ProVentacarProyectContext context)
+        public RepuestosController(ProVentacarProyectContext context, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         // GET: Repuestos
@@ -23,6 +25,11 @@ namespace ProVentaCarros.Controllers
         {
             var proVentacarProyectContext = _context.Repuestos.Include(r => r.IdDepartamentoNavigation).Include(r => r.IdVendedorNavigation);
             return View(await proVentacarProyectContext.ToListAsync());
+        }
+        public async Task<IActionResult> Publicaciones()
+        {
+            var ventacarProyectContext = _context.Autos.Include(a => a.IdDepartamentoNavigation).Include(a => a.IdMarcaNavigation).Include(a => a.IdVendedorNavigation);
+            return View(await ventacarProyectContext.ToListAsync());
         }
 
         // GET: Repuestos/Details/5
@@ -45,6 +52,29 @@ namespace ProVentaCarros.Controllers
             return View(repuesto);
         }
 
+
+        public async Task<string> GuardarImage(IFormFile? file, string url = "")
+        {
+            string urlImage = url;
+            if (file != null && file.Length > 0)
+            {
+                // Construir la ruta del archivo
+                string nameFile = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                string path = Path.Combine(_webHostEnvironment.WebRootPath, "imagenes", nameFile);
+
+                // Guardar la imagen en wwwroot
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
+
+                // Guardar la ruta en la base de datos
+                urlImage = "/imagenes/" + nameFile;
+            }
+            return urlImage;
+        }
+
+
         // GET: Repuestos/Create
         public IActionResult Create()
         {
@@ -58,10 +88,11 @@ namespace ProVentaCarros.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,NombreRepuesto,IdVendedor,IdDepartamento,ImgProducto,Compatiblilidad,DescripcionR,Proveniencia,EstadoRp,Precio,FechaRp,Disponibilidad,Actividad,ComentarioR")] Repuesto repuesto)
+        public async Task<IActionResult> Create([Bind("Id,NombreRepuesto,IdVendedor,IdDepartamento,ImgProducto,Compatiblilidad,DescripcionR,Proveniencia,EstadoRp,Precio,FechaRp,Disponibilidad,Actividad,ComentarioR")] Repuesto repuesto, IFormFile? file = null)
         {
             if (ModelState.IsValid)
             {
+                repuesto.ImgProducto = await GuardarImage(file);
                 _context.Add(repuesto);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -94,7 +125,7 @@ namespace ProVentaCarros.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,NombreRepuesto,IdVendedor,IdDepartamento,ImgProducto,Compatiblilidad,DescripcionR,Proveniencia,EstadoRp,Precio,FechaRp,Disponibilidad,Actividad,ComentarioR")] Repuesto repuesto)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,NombreRepuesto,IdVendedor,IdDepartamento,ImgProducto,Compatiblilidad,DescripcionR,Proveniencia,EstadoRp,Precio,FechaRp,Disponibilidad,Actividad,ComentarioR")] Repuesto repuesto, IFormFile? file = null)
         {
             if (id != repuesto.Id)
             {
@@ -105,6 +136,7 @@ namespace ProVentaCarros.Controllers
             {
                 try
                 {
+                    repuesto.ImgProducto = await GuardarImage(file);
                     _context.Update(repuesto);
                     await _context.SaveChangesAsync();
                 }
