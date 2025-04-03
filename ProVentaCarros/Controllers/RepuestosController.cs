@@ -11,11 +11,13 @@ namespace ProVentaCarros.Controllers
 {
     public class RepuestosController : Controller
     {
+        //heree!!!!
         private readonly ProVentacarProyectContext _context;
         private readonly IWebHostEnvironment _webHostEnvironment;
-
+        //heree!!!!
         public RepuestosController(ProVentacarProyectContext context, IWebHostEnvironment webHostEnvironment)
         {
+            //heree!!!!
             _context = context;
             _webHostEnvironment = webHostEnvironment;
         }
@@ -53,6 +55,7 @@ namespace ProVentaCarros.Controllers
         }
 
 
+        //heree!!!!
         public async Task<string> GuardarImage(IFormFile? file, string url = "")
         {
             string urlImage = url;
@@ -88,6 +91,9 @@ namespace ProVentaCarros.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+
+        //heree!!!!
+
         public async Task<IActionResult> Create([Bind("Id,NombreRepuesto,IdVendedor,IdDepartamento,ImgProducto,Compatiblilidad,DescripcionR,Proveniencia,EstadoRp,Precio,FechaRp,Disponibilidad,Actividad,ComentarioR")] Repuesto repuesto, IFormFile? file = null)
         {
             if (ModelState.IsValid)
@@ -197,5 +203,14 @@ namespace ProVentaCarros.Controllers
         {
             return _context.Repuestos.Any(e => e.Id == id);
         }
+
+
+        //Aquiiii
+        public async Task<IActionResult> PublicLista()
+        {
+            var repuestos = await _context.Repuestos.ToListAsync();
+            return View(repuestos);
+        }
+
     }
 }

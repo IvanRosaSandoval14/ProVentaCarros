@@ -4,100 +4,92 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>Detalles del Repuesto</h1>
 
-<div>
-    <h4>Repuesto</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NombreRepuesto)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NombreRepuesto)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ImgProducto)
-        </dt>
+<div class="catalog-item body2" style="width: 100%; background-color :darkgray; border: 1px solid #ddd; padding: 20px; margin: 0; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);">
+    <div class="image-container" style="text-align: center; margin-bottom: 20px;">
+        @if (!string.IsNullOrWhiteSpace(Model.ImgProducto))
+        {
+            <img src="@Model.ImgProducto" alt="@Model.NombreRepuesto" style="max-width: 600px; height: 375px;" />
+        }
+        else
+        {
+            <p>No hay imagen disponible.</p>
+        }
+    </div>
 
+    <div class="details-container">
+        <div class="detail-row">
+            <div class="detail-item"><strong>@Html.DisplayNameFor(model => model.NombreRepuesto):</strong> @Model.NombreRepuesto</div>
+            <div class="detail-item"><strong>@Html.DisplayNameFor(model => model.DescripcionR):</strong> @Model.DescripcionR</div>
+        </div>
+        <div class="detail-row">
+            <div class="detail-item"><strong>@Html.DisplayNameFor(model => model.Compatiblilidad):</strong> @Model.Compatiblilidad</div>
+            <div class="detail-item"><strong>@Html.DisplayNameFor(model => model.Proveniencia):</strong> @Model.Proveniencia</div>
+        </div>
+        <div class="detail-row">
+            <div class="detail-item"><strong>@Html.DisplayNameFor(model => model.EstadoRp):</strong> @Model.EstadoRp</div>
+            <div class="detail-item"><strong>@Html.DisplayNameFor(model => model.Precio):</strong> @Model.Precio</div>
+        </div>
+        <div class="detail-row">
+            <div class="detail-item"><strong>@Html.DisplayNameFor(model => model.Precio):</strong> @Model.Precio</div>
+            <div class="detail-item"><strong>@Html.DisplayNameFor(model => model.FechaRp):</strong> @Model.FechaRp</div>
+        </div>
+        <div class="detail-row">
+            <div class="detail-item"><strong>@Html.DisplayNameFor(model => model.Actividad):</strong> @Model.Actividad</div>
+            <div class="detail-item"><strong>@Html.DisplayNameFor(model => model.Disponibilidad):</strong> @Model.Disponibilidad</div>
+        </div>
+        <div class="detail-row">
+            <div class="detail-item"><strong>@Html.DisplayNameFor(model => model.IdDepartamentoNavigation):</strong> @Model.IdDepartamentoNavigation.Id</div>
 
-        <dd class="col-sm-10">
-            @if (!string.IsNullOrWhiteSpace(Model.ImgProducto))
-            {
-                <img src="@Model.ImgProducto" style="width:75px" />
-            }
-        </dd>
+        </div>
+        <div class="detail-row">
+            <div class="detail-item"><strong>@Html.DisplayNameFor(model => model.IdVendedorNavigation):</strong> @Model.IdVendedorNavigation.Id</div>
+        </div>
+    </div>
 
+    <div style="margin-top: 20px;">
 
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Compatiblilidad)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Compatiblilidad)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DescripcionR)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DescripcionR)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Proveniencia)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Proveniencia)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.EstadoRp)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.EstadoRp)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Precio)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Precio)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FechaRp)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FechaRp)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Disponibilidad)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Disponibilidad)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Actividad)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Actividad)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ComentarioR)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ComentarioR)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdDepartamentoNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdDepartamentoNavigation.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdVendedorNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdVendedorNavigation.Id)
-        </dd>
-    </dl>
+        <a asp-action="Index" class="btn btn-primary">Regresar</a>
+    </div>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+
+<style>
+    /* body {
+            background-color: lightblue;
+        }
+
+        body2 {
+            background-color: white;
+        } */
+
+    .image-container {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+        .image-container img {
+            max-width: 600px; /* Ajusta el tamaño de la imagen */
+            height: 375px;
+        }
+
+    .details-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .detail-row {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .detail-item {
+        width: 48%; /* Ajusta el ancho de cada elemento */
+        padding: 5px;
+        border-bottom: 1px solid #eee;
+    }
+</style>
+
+
