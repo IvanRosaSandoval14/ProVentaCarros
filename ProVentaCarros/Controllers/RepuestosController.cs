@@ -26,7 +26,8 @@ namespace ProVentaCarros.Controllers
         {
             var proVentacarProyectContext = _context.Repuestos
                 .Include(r => r.IdDepartamentoNavigation)
-                .Include(r => r.IdVendedorNavigation);
+                .Include(r => r.IdVendedorNavigation)
+               .Where(r => r.Actividad == 1);
             return View(await proVentacarProyectContext.ToListAsync());
         }
 
@@ -218,9 +219,75 @@ namespace ProVentaCarros.Controllers
             var repuestos = await _context.Repuestos
                 .Include(r => r.IdDepartamentoNavigation)
                 .Include(r => r.IdVendedorNavigation)
+                .Where(r => r.Actividad == 1)
                 .ToListAsync();
             return View(repuestos);
         }
+
+
+
+        public IActionResult ListaCompleta()
+        {
+            var repuestos = _context.Repuestos.ToList(); // Muestra activos e inactivos
+            return View(repuestos);
+        }
+
+
+        public async Task<IActionResult> Desactivar(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var repuesto = await _context.Repuestos.FindAsync(id);
+            if (repuesto == null)
+            {
+                return NotFound();
+            }
+
+            // Cambiar el estado a inactivo (0)
+            repuesto.Actividad = 0;
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index)); // Redirigir a la lista principal
+        }
+
+        // GET: Repuestos/Inactivos
+        public async Task<IActionResult> Inactivos()
+        {
+            var repuestosInactivos = await _context.Repuestos
+                .Include(r => r.IdDepartamentoNavigation)
+                .Include(r => r.IdVendedorNavigation)
+                .Where(r => r.Actividad == 0) // Filtrar solo los inactivos
+                .ToListAsync();
+
+            return View(repuestosInactivos);
+        }
+
+        // GET: Repuestos/Activar/5
+        public async Task<IActionResult> Activar(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var repuesto = await _context.Repuestos.FindAsync(id);
+            if (repuesto == null)
+            {
+                return NotFound();
+            }
+
+            // Cambiar el estado a activo (1)
+            repuesto.Actividad = 1;
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index)); // Redirigir a la lista principal
+        }
+
+
+
     }
 }
 

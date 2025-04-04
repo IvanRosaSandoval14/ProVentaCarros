@@ -1,0 +1,54 @@
+﻿@model IEnumerable<ProVentaCarros.Models.Repuesto>
+
+@{
+    ViewData["Title"] = "Repuestos Inactivos";
+}
+
+<h1 style="text-align: center; margin-bottom: 20px; color: #dc3545;">Repuestos Inactivos</h1>
+
+<p>
+    <a asp-action="Index" class="btn btn-primary">Volver a Repuestos Activos</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Repuesto</th>
+            <th>Vendedor</th>
+            <th>Departamento</th>
+            <th>Imagen</th>
+            <th>Descripción</th>
+            <th>Precio</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.NombreRepuesto</td>
+                <td>@item.IdVendedorNavigation?.Nombre</td>
+                <td>@item.IdDepartamentoNavigation?.Departamento1</td>
+                <td>
+                    @if (!string.IsNullOrWhiteSpace(item.ImgProducto))
+                    {
+                        <img src="@item.ImgProducto" alt="@item.NombreRepuesto" style="max-width: 50px; max-height: 50px;">
+                    }
+                    else
+                    {
+                        <span>Sin Imagen</span>
+                    }
+                </td>
+                <td>@item.DescripcionR</td>
+                <td>@item.Precio</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-sm">Detalles</a>
+                    <a asp-action="Activar" asp-route-id="@item.Id" class="btn btn-success btn-sm">Activar</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

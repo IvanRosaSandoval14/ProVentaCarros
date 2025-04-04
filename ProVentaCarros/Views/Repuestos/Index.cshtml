@@ -1,6 +1,5 @@
 ﻿@model IEnumerable<ProVentaCarros.Models.Repuesto>
 
-
 @{
     ViewData["Title"] = "Index";
 }
@@ -10,6 +9,8 @@
 <p style="margin-top: 20px; text-align: center;">
     <a asp-action="Create" class="btn btn-success">Crear Nuevo Repuesto</a>
     <a asp-controller="Repuestos" asp-action="PublicLista" class="btn btn-primary">Ver Repuestos Disponibles</a>
+    <a asp-controller="Repuestos" asp-action="Inactivos" class="btn btn-warning">Ver Repuestos Inactivos</a>
+</p>
 
 <div class="row row-cols-1 row-cols-md-3 g-4">
     @foreach (var item in Model)
@@ -31,27 +32,15 @@
                     <ul class="list-unstyled">
                         <li><strong>Vendedor:</strong> @Html.DisplayFor(modelItem => item.IdVendedorNavigation.Nombre)</li>
                         <li><strong>Departamento:</strong> @Html.DisplayFor(modelItem => item.IdDepartamentoNavigation.Departamento1)</li>
-
                         <li><strong>Descripción:</strong> @Html.DisplayFor(modelItem => item.DescripcionR)</li>
                         <li><strong>Precio:</strong> @Html.DisplayFor(modelItem => item.Precio)</li>
                         <li><strong>Estado Fisico:</strong> @Html.DisplayFor(modelItem => item.EstadoRp)</li>
-
-
-
-                       @*  <li><strong>Descripción:</strong> @Html.DisplayFor(modelItem => item.DescripcionR)</li>
-                        <li><strong>Compatibilidad:</strong> @Html.DisplayFor(modelItem => item.Compatiblilidad)</li>
-                        <li><strong>Proveniencia:</strong> @Html.DisplayFor(modelItem => item.Proveniencia)</li>
-                        <li><strong>Estado:</strong> @Html.DisplayFor(modelItem => item.EstadoRp)</li>
-                        <li><strong>Precio:</strong> @Html.DisplayFor(modelItem => item.Precio)</li>
-                        <li><strong>Disponibilidad:</strong> @Html.DisplayFor(modelItem => item.Disponibilidad)</li> *@
                     </ul>
                     <div class="text-center">
                         <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-sm">Detalles</a>
                         <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary btn-sm">Editar</a>
-                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Eliminar</a>  
-
-
-                       
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Eliminar</a>
+                        <a asp-action="Desactivar" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Desactivar</a>
                     </div>
                 </div>
                 <div class="card-footer text-muted text-center">
@@ -61,8 +50,7 @@
         </div>
     }
 </div>
-
-
+   
 
     <style>
         .card {

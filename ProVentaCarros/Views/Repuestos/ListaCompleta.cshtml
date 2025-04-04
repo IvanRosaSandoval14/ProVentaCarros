@@ -1,0 +1,45 @@
+﻿@model List<Repuesto>
+
+<h2>Lista Completa de Repuestos</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var repuestos in Model)
+        {
+            <tr>
+                <td>@repuestos.Id</td>
+                <td>@repuestos.NombreRepuesto</td>
+                <td>
+                    <span class="badge @(repuestos. Actividad  == 1 ? "bg-success" : "bg-danger")">
+                        @(repuestos.Actividad == 1 ? "Activo" : "Inactivo")
+                    </span>
+                </td>
+                <td>
+                    @if (repuestos.Actividad == 1)
+                    {
+                        <a class="btn btn-warning btn-sm" href="@Url.Action("Inactivar", "Repuesto", new { id = repuestos.Id })">
+                            Inactivar
+                        </a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-success btn-sm" href="@Url.Action("Activar", "Repuesto", new { id = repuestos.Id })">
+                            Activar
+                        </a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a class="btn btn-primary" href="@Url.Action("Index", "Usuario")">Volver a Usuarios Activos</a>
+
