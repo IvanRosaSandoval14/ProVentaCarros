@@ -51,6 +51,30 @@ namespace ProVentaCarros.Controllers
             return View(repuesto);
         }
 
+
+
+        public async Task<IActionResult> Detallescliente(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var repuesto = await _context.Repuestos
+                .Include(r => r.IdDepartamentoNavigation)
+                .Include(r => r.IdVendedorNavigation)
+                .FirstOrDefaultAsync(m => m.Id == id);
+
+            if (repuesto == null)
+            {
+                return NotFound();
+            }
+
+            return View(repuesto);
+        }
+
+
+
         public async Task<string> GuardarImage(IFormFile? file, string url = "")
         {
             string urlImage = url;

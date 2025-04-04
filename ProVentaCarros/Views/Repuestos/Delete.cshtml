@@ -25,38 +25,57 @@
                 <div class="card-body p-4">
                     <h3>¿Estás seguro de que quieres eliminar este repuesto?</h3>
                     <dl class="list-group list-group-flush">
+
                         <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <strong style="color: #555;">Vendedor:</strong>
+                            <span class="text-muted">@Model.IdVendedorNavigation?.Nombre</span>
+                        </li>
+
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <strong style="color: #555;">Departamento:</strong>
+                            <span class="text-muted">@Model.IdDepartamentoNavigation?.Departamento1</span>
+                        </li>
+
+                       <li class="list-group-item d-flex justify-content-between align-items-center">
                             <strong style="color: #555;">@Html.DisplayNameFor(model => model.NombreRepuesto):</strong>
                             <span class="text-muted">@Html.DisplayFor(model => model.NombreRepuesto)</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <strong style="color: #555;">@Html.DisplayNameFor(model => model.Compatiblilidad):</strong>
-                            <span class="text-muted">@Html.DisplayFor(model => model.Compatiblilidad)</span>
-                        </li>
+                        </li> 
+
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                             <strong style="color: #555;">@Html.DisplayNameFor(model => model.DescripcionR):</strong>
                             <span class="text-muted">@Html.DisplayFor(model => model.DescripcionR)</span>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <strong style="color: #555;">@Html.DisplayNameFor(model => model.Proveniencia):</strong>
-                            <span class="text-muted">@Html.DisplayFor(model => model.Proveniencia)</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <strong style="color: #555;">@Html.DisplayNameFor(model => model.EstadoRp):</strong>
-                            <span class="text-muted">@Html.DisplayFor(model => model.EstadoRp)</span>
-                        </li>
+
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                             <strong style="color: #555;">@Html.DisplayNameFor(model => model.Precio):</strong>
                             <span class="text-muted">@Html.DisplayFor(model => model.Precio)</span>
                         </li>
+
                         <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <strong style="color: #555;">@Html.DisplayNameFor(model => model.FechaRp):</strong>
-                            <span class="text-muted">@Html.DisplayFor(model => model.FechaRp)</span>
+                            <strong style="color: #555;">@Html.DisplayNameFor(model => model.EstadoRp):</strong>
+                            <span class="text-muted">@Html.DisplayFor(model => model.EstadoRp)</span>
                         </li>
+
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <strong style="color: #555;">@Html.DisplayNameFor(model => model.Compatiblilidad):</strong>
+                            <span class="text-muted">@Html.DisplayFor(model => model.Compatiblilidad)</span>
+                        </li>
+                      
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <strong style="color: #555;">@Html.DisplayNameFor(model => model.Proveniencia):</strong>
+                            <span class="text-muted">@Html.DisplayFor(model => model.Proveniencia)</span>
+                        </li>
+
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                             <strong style="color: #555;">@Html.DisplayNameFor(model => model.Disponibilidad):</strong>
                             <span class="text-muted">@Html.DisplayFor(model => model.Disponibilidad)</span>
                         </li>
+
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <strong style="color: #555;">@Html.DisplayNameFor(model => model.FechaRp):</strong>
+                            <span class="text-muted">@Html.DisplayFor(model => model.FechaRp)</span>
+                        </li>
+                      
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                             <strong style="color: #555;">@Html.DisplayNameFor(model => model.Actividad):</strong>
                             <span class="text-muted">@Html.DisplayFor(model => model.Actividad)</span>
@@ -65,14 +84,7 @@
                             <strong style="color: #555;">@Html.DisplayNameFor(model => model.ComentarioR):</strong>
                             <span class="text-muted">@Html.DisplayFor(model => model.ComentarioR)</span>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <strong style="color: #555;">@Html.DisplayNameFor(model => model.IdDepartamentoNavigation):</strong>
-                            <span class="text-muted">@Html.DisplayFor(model => model.IdDepartamentoNavigation.Departamento1)</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <strong style="color: #555;">@Html.DisplayNameFor(model => model.IdVendedorNavigation):</strong>
-                            <span class="text-muted">@Html.DisplayFor(model => model.IdVendedorNavigation.Nombre)</span>
-                        </li>
+                        
                     </dl>
 
                     <form asp-action="Delete">

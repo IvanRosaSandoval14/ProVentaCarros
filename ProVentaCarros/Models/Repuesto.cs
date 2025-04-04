@@ -8,6 +8,7 @@ public partial class Repuesto
 {
     public int Id { get; set; }
 
+    [Display(Name = "Repuesto")]
     public string? NombreRepuesto { get; set; } = null!;
 
     [Display(Name = "Vendedor")]

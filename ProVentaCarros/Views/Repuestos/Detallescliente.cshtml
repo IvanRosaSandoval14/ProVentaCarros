@@ -26,7 +26,7 @@
                     <h1 class="card-title mb-3" style="color: #007bff;">@Model.NombreRepuesto</h1>
                     <ul class="list-group list-group-flush">
 
-                       @*  Mando a llamar al vendedor y al departamento *@
+                        @*  Mando a llamar al vendedor y al departamento *@
 
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                             <strong style="color: #555;">Vendedor:</strong>
@@ -63,11 +63,11 @@
                             <strong style="color: #555;">Procedencia:</strong>
                             <span class="text-muted">@Model.Proveniencia</span>
                         </li>
-                       
-                       
-                       
-                       
-                     @*    <li class="list-group-item d-flex justify-content-between align-items-center">
+
+
+
+
+                        @*    <li class="list-group-item d-flex justify-content-between align-items-center">
                             <strong style="color: #555;">@Html.DisplayNameFor(model => model.FechaRp):</strong>
                             <span class="text-muted">@Model.FechaRp.ToShortDateString()</span>
                         </li> *@
@@ -80,9 +80,9 @@
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                             <strong style="color: #555;">@Html.DisplayNameFor(model => model.Actividad):</strong>
                             <span class="text-muted">@Model.Actividad</span>
-                        </li>                   
+                        </li>
 
-                      @*   <li class="list-group-item d-flex justify-content-between align-items-center">
+                        @*   <li class="list-group-item d-flex justify-content-between align-items-center">
                             <strong style="color: #555;">@Html.DisplayNameFor(model => model.ComentarioR):</strong>
                             <span class="text-muted">@Model.ComentarioR</span>
                         </li> *@
@@ -95,7 +95,7 @@
 
                     </ul>
                     <div class="mt-4">
-                        <a asp-action="Index" class="btn btn-outline-secondary">Regresar a la Lista</a>
+                        <a asp-action="PublicLista" class="btn btn-outline-secondary">Regresar a la Lista</a>
                     </div>
                 </div>
             </div>
