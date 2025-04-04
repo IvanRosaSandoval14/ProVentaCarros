@@ -1,164 +1,106 @@
 ﻿@model ProVentaCarros.Models.Repuesto
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Crear Repuesto";
 }
 
-<h1 style="text-align: center; margin-bottom: 20px; color: #333;">Crear Repuestos</h1>
+<h1 class="text-center mb-4" style="color: #333;">Crear Repuesto</h1>
 
-<hr style="border-color: #ddd; margin-bottom: 30px;" />
+<div class="container">
+    <div class="card shadow-lg">
+        <div class="card-body p-4">
+            <form asp-action="Create" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input asp-for="ImgProducto" type="hidden" class="form-control" value="URL" />
 
-<div class="row" style="justify-content: center;">
-    <div class="col-md-8" style="border: 1px solid #ddd; padding: 20px; border-radius: 8px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); background-color: darkgray;">
-        <form asp-action="Create" enctype="multipart/form-data">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input asp-for="ImgProducto" type="hidden" class="form-control" value="URL" />
-
-            <div class="form-group" style="margin-bottom: 15px;">
-                <label asp-for="NombreRepuesto" class="control-label" style="font-weight: bold;">Nombre del Repuesto</label>
-                <input asp-for="NombreRepuesto" class="form-control" />
-                <span asp-validation-for="NombreRepuesto" class="text-danger"></span>
-            </div>
-
-            <div class="form-group" style="margin-bottom: 15px;">
-                <label asp-for="IdVendedor" class="control-label" style="font-weight: bold;">Vendedor</label>
-                <select asp-for="IdVendedor" class="form-control" asp-items="ViewBag.IdVendedor"></select>
-            </div>
-
-            <div class="form-group" style="margin-bottom: 15px;">
-                <label asp-for="IdDepartamento" class="control-label" style="font-weight: bold;">Departamento</label>
-                <select asp-for="IdDepartamento" class="form-control" asp-items="ViewBag.IdDepartamento"></select>
-            </div>
-
-            <div class="form-group" style="margin-bottom: 20px;">
-                <label for="file" class="control-label" style="font-weight: bold;">Imagen</label>
-                <input type="file" id="imageFile" name="file" class="form-control" accept="image/*" />
-                <div id="preview" style="display: none; margin-top: 10px; text-align: center;">
-                    <img id="imagePreview" src="#" alt="Vista previa de la imagen" style="max-width: 300px; max-height: 200px; border: 1px solid #ddd; border-radius: 4px; box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);">
+                <div class="mb-3">
+                    <label asp-for="NombreRepuesto" class="form-label" style="color: #555;"></label>
+                    <input asp-for="NombreRepuesto" class="form-control" />
+                    <span asp-validation-for="NombreRepuesto" class="text-danger"></span>
                 </div>
-            </div>
 
-            <div class="form-group" style="margin-bottom: 15px;">
-                <label asp-for="Compatiblilidad" class="control-label" style="font-weight: bold;">Compatibilidad</label>
-                <input asp-for="Compatiblilidad" class="form-control" />
-                <span asp-validation-for="Compatiblilidad" class="text-danger"></span>
-            </div>
+                <div class="mb-3">
+                    <label asp-for="IdVendedor" class="form-label" style="color: #555;"></label>
+                    <select asp-for="IdVendedor" class="form-control" asp-items="ViewBag.IdVendedor"></select>
+                    <span asp-validation-for="IdVendedor" class="text-danger"></span>
+                </div>
 
-            <div class="form-group" style="margin-bottom: 15px;">
-                <label asp-for="DescripcionR" class="control-label" style="font-weight: bold;">Descripción</label>
-                <input asp-for="DescripcionR" class="form-control" />
-                <span asp-validation-for="DescripcionR" class="text-danger"></span>
-            </div>
+                <div class="mb-3">
+                    <label asp-for="IdDepartamento" class="form-label" style="color: #555;"></label>
+                    <select asp-for="IdDepartamento" class="form-control" asp-items="ViewBag.IdDepartamento"></select>
+                    <span asp-validation-for="IdDepartamento" class="text-danger"></span>
+                </div>
 
-            <div class="form-group" style="margin-bottom: 15px;">
-                <label asp-for="Proveniencia" class="control-label" style="font-weight: bold;">Proveniencia</label>
-                <input asp-for="Proveniencia" class="form-control" />
-                <span asp-validation-for="Proveniencia" class="text-danger"></span>
-            </div>
+                <div class="mb-3">
+                    <label for="file" class="form-label" style="color: #555;">Imagen</label>
+                    <input type="file" id="imageFile" name="file" class="form-control" accept="image/*" />
+                    <div id="preview" style="display: none; margin-top: 10px; text-align: center;">
+                        <img id="imagePreview" src="#" alt="Vista previa de la imagen" style="max-width: 300px; max-height: 200px; border: 1px solid #ddd; border-radius: 4px; box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);">
+                    </div>
+                </div>
 
-            <div class="form-group" style="margin-bottom: 15px;">
-                <label asp-for="EstadoRp" class="control-label" style="font-weight: bold;">Estado</label>
-                <input asp-for="EstadoRp" class="form-control" />
-                <span asp-validation-for="EstadoRp" class="text-danger"></span>
-            </div>
+                <div class="mb-3">
+                    <label asp-for="Compatiblilidad" class="form-label" style="color: #555;"></label>
+                    <input asp-for="Compatiblilidad" class="form-control" />
+                    <span asp-validation-for="Compatiblilidad" class="text-danger"></span>
+                </div>
 
-            <div class="form-group" style="margin-bottom: 15px;">
-                <label asp-for="Precio" class="control-label" style="font-weight: bold;">Precio</label>
-                <input asp-for="Precio" class="form-control" />
-                <span asp-validation-for="Precio" class="text-danger"></span>
-            </div>
+                <div class="mb-3">
+                    <label asp-for="DescripcionR" class="form-label" style="color: #555;"></label>
+                    <input asp-for="DescripcionR" class="form-control" />
+                    <span asp-validation-for="DescripcionR" class="text-danger"></span>
+                </div>
 
-            <div class="form-group" style="margin-bottom: 15px;">
-                <label asp-for="FechaRp" class="control-label" style="font-weight: bold;">Fecha de Registro</label>
-                <input asp-for="FechaRp" class="form-control" />
-                <span asp-validation-for="FechaRp" class="text-danger"></span>
-            </div>
+                <div class="mb-3">
+                    <label asp-for="Proveniencia" class="form-label" style="color: #555;"></label>
+                    <input asp-for="Proveniencia" class="form-control" />
+                    <span asp-validation-for="Proveniencia" class="text-danger"></span>
+                </div>
 
-            <div class="form-group" style="margin-bottom: 15px;">
-                <label asp-for="Disponibilidad" class="control-label" style="font-weight: bold;">Disponibilidad</label>
-                <input asp-for="Disponibilidad" class="form-control" />
-                <span asp-validation-for="Disponibilidad" class="text-danger"></span>
-            </div>
+                <div class="mb-3">
+                    <label asp-for="EstadoRp" class="form-label" style="color: #555;"></label>
+                    <input asp-for="EstadoRp" class="form-control" />
+                    <span asp-validation-for="EstadoRp" class="text-danger"></span>
+                </div>
 
-            <div class="form-group" style="margin-bottom: 15px;">
-                <label asp-for="Actividad" class="control-label" style="font-weight: bold;">Actividad</label>
-                <input asp-for="Actividad" class="form-control" />
-                <span asp-validation-for="Actividad" class="text-danger"></span>
-            </div>
+                <div class="mb-3">
+                    <label asp-for="Precio" class="form-label" style="color: #555;"></label>
+                    <input asp-for="Precio" class="form-control" />
+                    <span asp-validation-for="Precio" class="text-danger"></span>
+                </div>
 
-            <div class="form-group" style="margin-bottom: 15px;">
-                <label asp-for="ComentarioR" class="control-label" style="font-weight: bold;">Comentario</label>
-                <input asp-for="ComentarioR" class="form-control" />
-                <span asp-validation-for="ComentarioR" class="text-danger"></span>
-            </div>
+                <div class="mb-3">
+                    <label asp-for="FechaRp" class="form-label" style="color: #555;"></label>
+                    <input asp-for="FechaRp" class="form-control" />
+                    <span asp-validation-for="FechaRp" class="text-danger"></span>
+                </div>
 
-            <div class="form-group" style="text-align: center;">
-                <input type="submit" value="Crear" class="btn btn-primary" />
-            </div>
-        </form>
+                <div class="mb-3">
+                    <label asp-for="Disponibilidad" class="form-label" style="color: #555;"></label>
+                    <input asp-for="Disponibilidad" class="form-control" />
+                    <span asp-validation-for="Disponibilidad" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Actividad" class="form-label" style="color: #555;"></label>
+                    <input asp-for="Actividad" class="form-control" />
+                    <span asp-validation-for="Actividad" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="ComentarioR" class="form-label" style="color: #555;"></label>
+                    <input asp-for="ComentarioR" class="form-control" />
+                    <span asp-validation-for="ComentarioR" class="text-danger"></span>
+                </div>
+
+                <div class="mt-4">
+                    <input type="submit" value="Crear" class="btn btn-primary" />
+                    <a asp-action="Index" class="btn btn-outline-secondary">Regresar a la Lista</a>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
-
-<div style="text-align: center; margin-top: 20px;">
-    <a asp-action="Index" class="btn btn-secondary">Volver a la lista</a>
-</div>
-
-<style>
-    .form-group label {
-        font-weight: bold;
-        display: block;
-        margin-bottom: 5px;
-        color: #d1f3f1;
-    }
-
-    .form-control {
-        width: 100%;
-        padding: 0.75rem;
-        margin-bottom: 10px;
-        border: 1px solid #ced4da;
-        border-radius: 0.25rem;
-        box-sizing: border-box;
-    }
-
-    .text-danger {
-        color: #dc3545;
-        font-size: 0.875rem;
-        margin-top: 5px;
-        display: block;
-    }
-
-    .btn-primary {
-        background-color: #007bff;
-        border-color: #007bff;
-        color: white;
-        padding: 0.75rem 1.5rem;
-        border-radius: 0.25rem;
-        text-decoration: none;
-        cursor: pointer;
-        transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
-    }
-
-        .btn-primary:hover {
-            background-color: #0056b3;
-            border-color: #0056b3;
-        }
-
-    .btn-secondary {
-        background-color: #6c757d;
-        border-color: #6c757d;
-        color: white;
-        padding: 0.75rem 1.5rem;
-        border-radius: 0.25rem;
-        text-decoration: none;
-        cursor: pointer;
-        transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
-    }
-
-        .btn-secondary:hover {
-            background-color: #545b62;
-            border-color: #545b62;
-        }
-</style>
 
 <script>
     document.getElementById('imageFile').addEventListener('change', function (event) {
@@ -187,3 +129,21 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }
+
+<style>
+    .card {
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .btn-outline-secondary {
+        color: #6c757d;
+        border-color: #6c757d;
+    }
+
+        .btn-outline-secondary:hover {
+            background-color: #6c757d;
+            color: white;
+            border-color: #6c757d;
+        }
+</style>

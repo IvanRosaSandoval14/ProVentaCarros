@@ -6,18 +6,17 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ProVentaCarros.Models;
+using System.IO;
 
 namespace ProVentaCarros.Controllers
 {
     public class RepuestosController : Controller
     {
-        //heree!!!!
         private readonly ProVentacarProyectContext _context;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        //heree!!!!
+
         public RepuestosController(ProVentacarProyectContext context, IWebHostEnvironment webHostEnvironment)
         {
-            //heree!!!!
             _context = context;
             _webHostEnvironment = webHostEnvironment;
         }
@@ -25,13 +24,10 @@ namespace ProVentaCarros.Controllers
         // GET: Repuestos
         public async Task<IActionResult> Index()
         {
-            var proVentacarProyectContext = _context.Repuestos.Include(r => r.IdDepartamentoNavigation).Include(r => r.IdVendedorNavigation);
+            var proVentacarProyectContext = _context.Repuestos
+                .Include(r => r.IdDepartamentoNavigation)
+                .Include(r => r.IdVendedorNavigation);
             return View(await proVentacarProyectContext.ToListAsync());
-        }
-        public async Task<IActionResult> Publicaciones()
-        {
-            var ventacarProyectContext = _context.Autos.Include(a => a.IdDepartamentoNavigation).Include(a => a.IdMarcaNavigation).Include(a => a.IdVendedorNavigation);
-            return View(await ventacarProyectContext.ToListAsync());
         }
 
         // GET: Repuestos/Details/5
@@ -46,6 +42,7 @@ namespace ProVentaCarros.Controllers
                 .Include(r => r.IdDepartamentoNavigation)
                 .Include(r => r.IdVendedorNavigation)
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (repuesto == null)
             {
                 return NotFound();
@@ -54,29 +51,23 @@ namespace ProVentaCarros.Controllers
             return View(repuesto);
         }
 
-
-        //heree!!!!
         public async Task<string> GuardarImage(IFormFile? file, string url = "")
         {
             string urlImage = url;
             if (file != null && file.Length > 0)
             {
-                // Construir la ruta del archivo
                 string nameFile = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
                 string path = Path.Combine(_webHostEnvironment.WebRootPath, "imagenes", nameFile);
 
-                // Guardar la imagen en wwwroot
                 using (var stream = new FileStream(path, FileMode.Create))
                 {
                     await file.CopyToAsync(stream);
                 }
 
-                // Guardar la ruta en la base de datos
                 urlImage = "/imagenes/" + nameFile;
             }
             return urlImage;
         }
-
 
         // GET: Repuestos/Create
         public IActionResult Create()
@@ -87,13 +78,8 @@ namespace ProVentaCarros.Controllers
         }
 
         // POST: Repuestos/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-
-        //heree!!!!
-
         public async Task<IActionResult> Create([Bind("Id,NombreRepuesto,IdVendedor,IdDepartamento,ImgProducto,Compatiblilidad,DescripcionR,Proveniencia,EstadoRp,Precio,FechaRp,Disponibilidad,Actividad,ComentarioR")] Repuesto repuesto, IFormFile? file = null)
         {
             if (ModelState.IsValid)
@@ -103,8 +89,8 @@ namespace ProVentaCarros.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdDepartamento"] = new SelectList(_context.Departamentos, "Id", "Id", repuesto.IdDepartamento);
-            ViewData["IdVendedor"] = new SelectList(_context.Vendedores, "Id", "Id", repuesto.IdVendedor);
+            ViewData["IdDepartamento"] = new SelectList(_context.Departamentos, "Id", "Departamento1", repuesto.IdDepartamento);
+            ViewData["IdVendedor"] = new SelectList(_context.Vendedores, "Id", "Nombre", repuesto.IdVendedor);
             return View(repuesto);
         }
 
@@ -121,14 +107,12 @@ namespace ProVentaCarros.Controllers
             {
                 return NotFound();
             }
-            ViewData["IdDepartamento"] = new SelectList(_context.Departamentos, "Id", "Id", repuesto.IdDepartamento);
-            ViewData["IdVendedor"] = new SelectList(_context.Vendedores, "Id", "Id", repuesto.IdVendedor);
+            ViewData["IdDepartamento"] = new SelectList(_context.Departamentos, "Id", "Departamento1", repuesto.IdDepartamento);
+            ViewData["IdVendedor"] = new SelectList(_context.Vendedores, "Id", "Nombre", repuesto.IdVendedor);
             return View(repuesto);
         }
 
         // POST: Repuestos/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,NombreRepuesto,IdVendedor,IdDepartamento,ImgProducto,Compatiblilidad,DescripcionR,Proveniencia,EstadoRp,Precio,FechaRp,Disponibilidad,Actividad,ComentarioR")] Repuesto repuesto, IFormFile? file = null)
@@ -159,8 +143,8 @@ namespace ProVentaCarros.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdDepartamento"] = new SelectList(_context.Departamentos, "Id", "Id", repuesto.IdDepartamento);
-            ViewData["IdVendedor"] = new SelectList(_context.Vendedores, "Id", "Id", repuesto.IdVendedor);
+            ViewData["IdDepartamento"] = new SelectList(_context.Departamentos, "Id", "Departamento1", repuesto.IdDepartamento);
+            ViewData["IdVendedor"] = new SelectList(_context.Vendedores, "Id", "Nombre", repuesto.IdVendedor);
             return View(repuesto);
         }
 
@@ -176,6 +160,7 @@ namespace ProVentaCarros.Controllers
                 .Include(r => r.IdDepartamentoNavigation)
                 .Include(r => r.IdVendedorNavigation)
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (repuesto == null)
             {
                 return NotFound();
@@ -204,13 +189,18 @@ namespace ProVentaCarros.Controllers
             return _context.Repuestos.Any(e => e.Id == id);
         }
 
-
-        //Aquiiii
         public async Task<IActionResult> PublicLista()
         {
-            var repuestos = await _context.Repuestos.ToListAsync();
+            var repuestos = await _context.Repuestos
+                .Include(r => r.IdDepartamentoNavigation)
+                .Include(r => r.IdVendedorNavigation)
+                .ToListAsync();
             return View(repuestos);
         }
-
     }
 }
+
+
+
+
+

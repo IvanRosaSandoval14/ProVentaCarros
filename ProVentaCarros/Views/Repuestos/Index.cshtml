@@ -7,6 +7,10 @@
 
 <h1 style="text-align: center; margin-bottom: 20px; color: #333;">Ofertas de Repuestos</h1>
 
+<p style="margin-top: 20px; text-align: center;">
+    <a asp-action="Create" class="btn btn-success">Crear Nuevo Repuesto</a>
+    <a asp-controller="Repuestos" asp-action="PublicLista" class="btn btn-primary">Ver Repuestos Disponibles</a>
+
 <div class="row row-cols-1 row-cols-md-3 g-4">
     @foreach (var item in Model)
     {
@@ -25,12 +29,21 @@
                 <div class="card-body">
                     <h5 class="card-title" style="text-align: center;">@Html.DisplayFor(modelItem => item.NombreRepuesto)</h5>
                     <ul class="list-unstyled">
+                        <li><strong>Vendedor:</strong> @Html.DisplayFor(modelItem => item.IdVendedorNavigation.Nombre)</li>
+                        <li><strong>Departamento:</strong> @Html.DisplayFor(modelItem => item.IdDepartamentoNavigation.Departamento1)</li>
+
                         <li><strong>Descripción:</strong> @Html.DisplayFor(modelItem => item.DescripcionR)</li>
+                        <li><strong>Precio:</strong> @Html.DisplayFor(modelItem => item.Precio)</li>
+                        <li><strong>Estado Fisico:</strong> @Html.DisplayFor(modelItem => item.EstadoRp)</li>
+
+
+
+                       @*  <li><strong>Descripción:</strong> @Html.DisplayFor(modelItem => item.DescripcionR)</li>
                         <li><strong>Compatibilidad:</strong> @Html.DisplayFor(modelItem => item.Compatiblilidad)</li>
                         <li><strong>Proveniencia:</strong> @Html.DisplayFor(modelItem => item.Proveniencia)</li>
                         <li><strong>Estado:</strong> @Html.DisplayFor(modelItem => item.EstadoRp)</li>
                         <li><strong>Precio:</strong> @Html.DisplayFor(modelItem => item.Precio)</li>
-                        <li><strong>Disponibilidad:</strong> @Html.DisplayFor(modelItem => item.Disponibilidad)</li>
+                        <li><strong>Disponibilidad:</strong> @Html.DisplayFor(modelItem => item.Disponibilidad)</li> *@
                     </ul>
                     <div class="text-center">
                         <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-sm">Detalles</a>
@@ -49,60 +62,56 @@
     }
 </div>
 
-<p style="margin-top: 20px; text-align: center;">
-    <a asp-action="Create" class="btn btn-success">Crear Nuevo Repuesto</a>
-    <a asp-controller="Repuestos" asp-action="PublicLista" class="btn btn-outline-info">Ver Repuestos Disponibles</a>
-</p>
 
-<style>
-    .card {
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
 
-    .card-title {
-        color: #333;
-        margin-bottom: 10px;
-    }
-
-    .card-text, .list-unstyled li {
-        font-size: 0.9rem;
-        color: #555;
-        margin-bottom: 5px;
-    }
-
-    .btn-info {
-        background-color: #17a2b8;
-        border-color: #17a2b8;
-        color: white;
-    }
-
-        .btn-info:hover {
-            background-color: #138496;
-            border-color: #138496;
+    <style>
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-    .btn-primary {
-        background-color: #007bff;
-        border-color: #007bff;
-        color: white;
-    }
-
-        .btn-primary:hover {
-            background-color: #0056b3;
-            border-color: #0056b3;
+        .card-title {
+            color: #333;
+            margin-bottom: 10px;
         }
 
-    .btn-danger {
-        background-color: #dc3545;
-        border-color: #dc3545;
-        color: white;
-    }
-
-        .btn-danger:hover {
-            background-color: #c82333;
-            border-color: #c82333;
+        .card-text, .list-unstyled li {
+            font-size: 0.9rem;
+            color: #555;
+            margin-bottom: 5px;
         }
-</style>
 
+        .btn-info {
+            background-color: #17a2b8;
+            border-color: #17a2b8;
+            color: white;
+        }
+
+            .btn-info:hover {
+                background-color: #138496;
+                border-color: #138496;
+            }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            color: white;
+        }
+
+            .btn-primary:hover {
+                background-color: #0056b3;
+                border-color: #0056b3;
+            }
+
+        .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+            color: white;
+        }
+
+            .btn-danger:hover {
+                background-color: #c82333;
+                border-color: #c82333;
+            }
+    </style>
