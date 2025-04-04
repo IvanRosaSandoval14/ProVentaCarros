@@ -1,95 +1,135 @@
 ﻿@model ProVentaCarros.Models.Repuesto
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalles del Repuesto";
 }
 
-<h1>Detalles del Repuesto</h1>
+<h1 class="text-center mb-4" style="color: #333;">Detalles del Repuesto</h1>
 
-<div class="catalog-item body2" style="width: 100%; background-color :darkgray; border: 1px solid #ddd; padding: 20px; margin: 0; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);">
-    <div class="image-container" style="text-align: center; margin-bottom: 20px;">
-        @if (!string.IsNullOrWhiteSpace(Model.ImgProducto))
-        {
-            <img src="@Model.ImgProducto" alt="@Model.NombreRepuesto" style="max-width: 600px; height: 375px;" />
-        }
-        else
-        {
-            <p>No hay imagen disponible.</p>
-        }
-    </div>
+<div class="container">
+    <div class="card shadow-lg">
+        <div class="row g-0">
+            <div class="col-md-6 p-4 d-flex justify-content-center align-items-center" style="background-color: #f8f9fa;">
+                <div class="image-container" style="text-align: center;">
+                    @if (!string.IsNullOrWhiteSpace(Model.ImgProducto))
+                    {
+                        <img src="@Model.ImgProducto" alt="@Model.NombreRepuesto" class="img-fluid rounded" style="max-height: 400px; object-fit: contain;">
+                    }
+                    else
+                    {
+                        <p class="text-muted">No hay imagen disponible.</p>
+                    }
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card-body p-4">
+                    <h1 class="card-title mb-3" style="color: #007bff;">@Model.NombreRepuesto</h1>
+                    <ul class="list-group list-group-flush">
 
-    <div class="details-container">
-        <div class="detail-row">
-            <div class="detail-item"><strong>@Html.DisplayNameFor(model => model.NombreRepuesto):</strong> @Model.NombreRepuesto</div>
-            <div class="detail-item"><strong>@Html.DisplayNameFor(model => model.DescripcionR):</strong> @Model.DescripcionR</div>
-        </div>
-        <div class="detail-row">
-            <div class="detail-item"><strong>@Html.DisplayNameFor(model => model.Compatiblilidad):</strong> @Model.Compatiblilidad</div>
-            <div class="detail-item"><strong>@Html.DisplayNameFor(model => model.Proveniencia):</strong> @Model.Proveniencia</div>
-        </div>
-        <div class="detail-row">
-            <div class="detail-item"><strong>@Html.DisplayNameFor(model => model.EstadoRp):</strong> @Model.EstadoRp</div>
-            <div class="detail-item"><strong>@Html.DisplayNameFor(model => model.Precio):</strong> @Model.Precio</div>
-        </div>
-        <div class="detail-row">
-            <div class="detail-item"><strong>@Html.DisplayNameFor(model => model.Precio):</strong> @Model.Precio</div>
-            <div class="detail-item"><strong>@Html.DisplayNameFor(model => model.FechaRp):</strong> @Model.FechaRp</div>
-        </div>
-        <div class="detail-row">
-            <div class="detail-item"><strong>@Html.DisplayNameFor(model => model.Actividad):</strong> @Model.Actividad</div>
-            <div class="detail-item"><strong>@Html.DisplayNameFor(model => model.Disponibilidad):</strong> @Model.Disponibilidad</div>
-        </div>
-        <div class="detail-row">
-            <div class="detail-item"><strong>@Html.DisplayNameFor(model => model.IdDepartamentoNavigation):</strong> @Model.IdDepartamentoNavigation.Id</div>
+                       @*  Mando a llamar al vendedor y al departamento *@
 
-        </div>
-        <div class="detail-row">
-            <div class="detail-item"><strong>@Html.DisplayNameFor(model => model.IdVendedorNavigation):</strong> @Model.IdVendedorNavigation.Id</div>
-        </div>
-    </div>
+                        @if (Model.IdVendedorNavigation != null)
+                        {
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <strong style="color: #555;">Vendedor:</strong>
+                                <span class="text-muted">@Model.IdVendedorNavigation.Nombre</span>
+                            </li>
+                        }
 
-    <div style="margin-top: 20px;">
+                        @if (Model.IdDepartamentoNavigation != null)
+                        {
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <strong style="color: #555;">Departamento:</strong>
+                                <span class="text-muted">@Model.IdDepartamentoNavigation.Departamento1</span>
+                            </li>
+                        }
+                      
 
-        <a asp-action="Index" class="btn btn-primary">Regresar</a>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <strong style="color: #555;">@Html.DisplayNameFor(model => model.DescripcionR):</strong>
+                            <span class="text-muted">@Model.DescripcionR</span>
+                        </li>
+
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <strong style="color: #555;">@Html.DisplayNameFor(model => model.Precio):</strong>
+                            <span class="text-muted">@Model.Precio</span>
+                        </li>
+
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <strong style="color: #555;">@Html.DisplayNameFor(model => model.EstadoRp):</strong>
+                            <span class="text-muted">@Model.EstadoRp</span>
+                        </li>
+
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <strong style="color: #555;">@Html.DisplayNameFor(model => model.Compatiblilidad):</strong>
+                            <span class="text-muted">@Model.Compatiblilidad</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <strong style="color: #555;">@Html.DisplayNameFor(model => model.Proveniencia):</strong>
+                            <span class="text-muted">@Model.Proveniencia</span>
+                        </li>
+                       
+                       
+                     @*    <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <strong style="color: #555;">@Html.DisplayNameFor(model => model.FechaRp):</strong>
+                            <span class="text-muted">@Model.FechaRp.ToShortDateString()</span>
+                        </li> *@
+
+
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <strong style="color: #555;">@Html.DisplayNameFor(model => model.Disponibilidad):</strong>
+                            <span class="text-muted">@Model.Disponibilidad</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <strong style="color: #555;">@Html.DisplayNameFor(model => model.Actividad):</strong>
+                            <span class="text-muted">@Model.Actividad</span>
+                        </li>                   
+
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <strong style="color: #555;">@Html.DisplayNameFor(model => model.ComentarioR):</strong>
+                            <span class="text-muted">@Model.ComentarioR</span>
+                        </li>
+
+
+                    </ul>
+                    <div class="mt-4">
+                        <a asp-action="Index" class="btn btn-outline-secondary">Regresar a la Lista</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
 <style>
-    /* body {
-            background-color: lightblue;
+    .card {
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .list-group-item {
+        padding: 0.75rem 1rem;
+        border-left: none;
+        border-right: none;
+    }
+
+        .list-group-item:first-child {
+            border-top: none;
         }
 
-        body2 {
-            background-color: white;
-        } */
-
-    .image-container {
-        text-align: center;
-        margin-bottom: 20px;
-    }
-
-        .image-container img {
-            max-width: 600px; /* Ajusta el tamaño de la imagen */
-            height: 375px;
+        .list-group-item:last-child {
+            border-bottom: none;
         }
 
-    .details-container {
-        display: flex;
-        flex-direction: column;
+    .btn-outline-secondary {
+        color: #6c757d;
+        border-color: #6c757d;
     }
 
-    .detail-row {
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-        margin-bottom: 10px;
-    }
-
-    .detail-item {
-        width: 48%; /* Ajusta el ancho de cada elemento */
-        padding: 5px;
-        border-bottom: 1px solid #eee;
-    }
+        .btn-outline-secondary:hover {
+            background-color: #6c757d;
+            color: white;
+            border-color: #6c757d;
+        }
 </style>
-
 

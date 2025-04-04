@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace ProVentaCarros.Models;
 
@@ -9,28 +10,51 @@ public partial class Repuesto
 
     public string? NombreRepuesto { get; set; } = null!;
 
+    [Display(Name = "Vendedor")]
+    [Required(ErrorMessage = "El nombre es obligatorio.")]
     public int IdVendedor { get; set; }
 
+    [Display(Name = "Departamento")]
+    [Required(ErrorMessage = "El departamento es obligatorio.")]
     public int IdDepartamento { get; set; }
 
+    [Display(Name = "Imagen Producto")]
+    [Required(ErrorMessage = "La imagen es obligatoria.")]
     public string ImgProducto { get; set; } = null!;
 
+
+    [Display(Name = "Compatible con")]
     public string Compatiblilidad { get; set; } = null!;
 
+
+    [Display(Name = "Descripción")]
+    [Required(ErrorMessage = "La descripción es obligatoria.")]
     public string DescripcionR { get; set; } = null!;
 
+
+    [Display(Name = "Procedencia")]
     public string Proveniencia { get; set; } = null!;
 
+    [Display(Name = "Estado Fisico")]
+    [Required(ErrorMessage = "El estado fisico es obligatorio.")]
     public string EstadoRp { get; set; } = null!;
 
+    [Display(Name = "Precio")]
+    [Required(ErrorMessage = "El precio es obligatorio.")]
     public decimal? Precio { get; set; }
 
+    [Display(Name = "Duración de oferta")]
+    [Required(ErrorMessage = "La duración de oferta es obligatoria.")]
     public DateTime? FechaRp { get; set; }
 
+    [Display(Name = "Existencia")]
+    [Required(ErrorMessage = "La existencia es obligatoria.")]
     public int? Disponibilidad { get; set; }
 
+    [Display(Name = "Estado")]
     public byte? Actividad { get; set; }
 
+    [Display(Name = "Comentario")]
     public string? ComentarioR { get; set; }
 
     public virtual ICollection<DetalleVenta>? DetalleVenta { get; set; } = new List<DetalleVenta>();
