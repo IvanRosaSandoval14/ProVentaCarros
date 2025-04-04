@@ -81,8 +81,8 @@ namespace ProVentaCarros.Controllers
         // GET: Repuestos/Create
         public IActionResult Create()
         {
-            ViewData["IdDepartamento"] = new SelectList(_context.Departamentos, "Id", "Id");
-            ViewData["IdVendedor"] = new SelectList(_context.Vendedores, "Id", "Id");
+            ViewData["IdDepartamento"] = new SelectList(_context.Departamentos, "Id", "Departamento1");
+            ViewData["IdVendedor"] = new SelectList(_context.Vendedores, "Id", "Nombre");
             return View();
         }
 

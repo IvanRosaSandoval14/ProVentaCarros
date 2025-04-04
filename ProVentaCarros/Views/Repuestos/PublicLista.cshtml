@@ -24,8 +24,9 @@
                 <div class="card-body">
                     <h5 class="card-title" style="text-align: center;">@Html.DisplayFor(modelItem => item.NombreRepuesto)</h5>
                     <ul class="list-unstyled">
-                        <li><strong>Vendedor:</strong> @Html.DisplayFor(modelItem => item.IdVendedor)</li>
-                        <li><strong>Departamento:</strong> @Html.DisplayFor(modelItem => item.IdDepartamento)</li>
+                        <li><strong>Vendedor:</strong> @Html.DisplayFor(modelItem => item.IdVendedorNavigation.Nombre)</li>
+                        <li><strong>Departamento:</strong> @Html.DisplayFor(modelItem => item.IdDepartamentoNavigation.Departamento1)</li>
+                    
                         <li><strong>Descripción:</strong> @Html.DisplayFor(modelItem => item.DescripcionR)</li>                      
                         <li><strong>Precio:</strong> @Html.DisplayFor(modelItem => item.Precio)</li>
                         <li><strong>Estado Fisico:</strong> @Html.DisplayFor(modelItem => item.EstadoRp)</li>
