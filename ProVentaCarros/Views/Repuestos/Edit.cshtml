@@ -39,6 +39,9 @@
             <div class="mb-3">
                 <label for="file" class="form-label" style="color: #555;">Imagen</label>
                 <input type="file" id="imageFile" name="file" class="form-control" accept="image/*" />
+                <div id="preview" style="display: none; margin-top: 10px; text-align: center;">
+                    <img id="imagePreview" src="#" alt="Vista previa de la imagen" style="max-width: 300px; max-height: 200px; border: 1px solid #ddd; border-radius: 4px; box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);">
+                </div>
             </div>
 
             <div class="mb-3">
@@ -88,11 +91,14 @@
             <div class="form-group" style="margin-bottom: 15px;">
                 <label asp-for="Actividad" class="control-label">Actividad</label>
                 <select asp-for="Actividad" class="form-control">
+
                     <option value="1">Activo</option>
                     
                 </select>
                 <span asp-validation-for="Actividad" class="text-danger"></span>
             </div>
+
+
 
             <div class="mb-3">
                 <label asp-for="ComentarioR" class="form-label" style="color: #555;">Comentario</label>
@@ -109,7 +115,27 @@
 </div>
 
 
+<script>
+    document.getElementById('imageFile').addEventListener('change', function (event) {
+        const file = event.target.files[0];
+        const preview = document.getElementById('preview');
+        const imagePreview = document.getElementById('imagePreview');
 
+        if (file) {
+            const fileReader = new FileReader();
+
+            fileReader.onload = function (e) {
+                imagePreview.src = e.target.result;
+                preview.style.display = 'block';
+            };
+
+            fileReader.readAsDataURL(file);
+        } else {
+            imagePreview.src = '#';
+            preview.style.display = 'none';
+        }
+    });
+</script>
 
 
 
