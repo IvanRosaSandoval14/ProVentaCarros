@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ProVentaCarros.Models;
 using System.IO;
+using Azure.Core;
 
 namespace ProVentaCarros.Controllers
 {
@@ -22,8 +23,9 @@ namespace ProVentaCarros.Controllers
         }
 
         // GET: Repuestos
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(Repuesto repuesto, int topRegistro = 10)
         {
+
             var proVentacarProyectContext = _context.Repuestos
                 .Include(r => r.IdDepartamentoNavigation)
                 .Include(r => r.IdVendedorNavigation)
@@ -214,8 +216,9 @@ namespace ProVentaCarros.Controllers
             return _context.Repuestos.Any(e => e.Id == id);
         }
 
-        public async Task<IActionResult> PublicLista()
+        public async Task<IActionResult> PublicLista(Repuesto repuesto, int topRegistro = 10)
         {
+
             var repuestos = await _context.Repuestos
                 .Include(r => r.IdDepartamentoNavigation)
                 .Include(r => r.IdVendedorNavigation)
