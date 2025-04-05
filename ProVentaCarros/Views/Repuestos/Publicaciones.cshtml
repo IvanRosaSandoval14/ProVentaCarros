@@ -4,12 +4,14 @@
     ViewData["Title"] = "Repuestos Disponibles";
 }
 
-
+@* Este es el encabezado principal de la página *@
 <h1 style="text-align: center; margin-bottom: 20px; color: #333;">Mis ofertas de Repuestos</h1>
 
+@* Creacion de la accion *@
 <div style="text-align: right; margin-bottom: 15px;">
     <a asp-action="Create" class="btn btn-success">Nueva Oferta</a>
 </div>
+@*  Muestra una imagen de un producto si existe una URL de imagen en el modelo  *@
 <div class="catalog-container">
     @foreach (var item in Model)
     {
@@ -24,6 +26,7 @@
                     <img src="~/images/no-image.png" alt="Sin imagen" />
                 }
             </div>
+            @*  Muestra una lista de repuestos en un formato de catálogo o galería visual. *@
             <div class="catalog-details">
                 <h3>@item.NombreRepuesto</h3>
                 <p><strong>Vendedor:</strong> @item.IdVendedorNavigation.Nombre</p>
@@ -31,21 +34,13 @@
                 <p><strong>Descripción:</strong> @item.DescripcionR</p>
                 <p><strong>Precio:</strong> @item.Precio</p>
                 <p><strong>Estado Fisico:</strong> @item.EstadoRp</p>
-
-             @*    <p><strong>Compatibilidad:</strong> @item.Compatiblilidad</p>
-                <p><strong>Proveniencia:</strong> @item.Proveniencia</p>
-             
-              
-                <p><strong>Disponibilidad:</strong> @item.Disponibilidad</p>               
-                <p><strong>Comentario:</strong> @item.ComentarioR</p>
-                <p><strong>Fecha de registro:</strong> @item.FechaRp</p>
-                <p><strong>Actividad:</strong> @item.Actividad</p> *@
+          
             </div>
         </div>
     }
 </div>
 
-
+@* Estilo de la pagina *@
 <style>
     .btn-success {
         background-color: #28a745;
@@ -105,7 +100,7 @@
     .catalog-image {
         text-align: center;
         padding: 10px;
-        height: 150px; /* Ajusta la altura deseada */
+        height: 150px; 
         display: flex;
         justify-content: center;
         align-items: center;

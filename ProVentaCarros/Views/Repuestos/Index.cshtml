@@ -5,13 +5,14 @@
 }
 
 <h1 style="text-align: center; margin-bottom: 20px; color: #333;">Ofertas de Repuestos</h1>
-
+@* Creacion de las acciones  *@
 <p style="margin-top: 20px; text-align: center;">
     <a asp-action="Create" class="btn btn-success">Crear Nuevo Repuesto</a>
-    <a asp-controller="Repuestos" asp-action="PublicLista" class="btn btn-primary">Ver Repuestos Disponibles</a>
+    <a asp-controller="Repuestos" asp-action="PublicLista" class="btn btn-primary">Ver Mis Publicaciones</a>
     <a asp-controller="Repuestos" asp-action="Inactivos" class="btn btn-warning">Ver Repuestos Inactivos</a>
 </p>
 
+@* Muestra una lista de repuestos en un formato de tarjetas *@
 <div class="row row-cols-1 row-cols-md-3 g-4">
     @foreach (var item in Model)
     {
@@ -36,6 +37,7 @@
                         <li><strong>Precio:</strong> @Html.DisplayFor(modelItem => item.Precio)</li>
                         <li><strong>Estado Fisico:</strong> @Html.DisplayFor(modelItem => item.EstadoRp)</li>
                     </ul>
+                    @* Creacion de las acciones  *@
                     <div class="text-center">
                         <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-sm">Detalles</a>
                         <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary btn-sm">Editar</a>
@@ -46,12 +48,13 @@
                 <div class="card-footer text-muted text-center">
                     Publicado el @Html.DisplayFor(modelItem => item.FechaRp)
                 </div>
+               
             </div>
         </div>
     }
 </div>
    
-
+@* Estilo de la pagina *@
     <style>
         .card {
             border: 1px solid #ddd;

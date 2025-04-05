@@ -5,13 +5,14 @@
 }
 
 <h1 style="text-align: center; margin-bottom: 20px; color: #333;">Catalogo de Repuestos</h1>
-
+@* Este es el encabezado principal de la página *@
 <div class="row row-cols-1 row-cols-md-3 g-4">
     @foreach (var item in Model)
     {
         <div class="col">
             <div class="card h-100" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
                 <div style="text-align: center; padding: 10px;">
+                    @*  Muestra una imagen de un producto si existe una URL de imagen en el modelo  *@
                     @if (!string.IsNullOrWhiteSpace(item.ImgProducto))
                     {
                         <img src="@item.ImgProducto" class="card-img-top" alt="@item.NombreRepuesto" style="width: 200px; height: 150px; object-fit: contain;">
@@ -21,6 +22,7 @@
                         <p class="card-text">No hay imagen disponible.</p>
                     }
                 </div>
+                @*  Muestra detalles específicos del repuesto dentro del cuerpo de una tarjeta  *@
                 <div class="card-body">
                     <h5 class="card-title" style="text-align: center;">@Html.DisplayFor(modelItem => item.NombreRepuesto)</h5>
                     <ul class="list-unstyled">
@@ -50,6 +52,19 @@
     }
 </div>
 
+@*  Define una sección específica dentro de una vista de contenido dentro de la página de diseño  *@
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+
+             $('#myTable').DataTable({
+               "language":languageTable
+             });
+        });
+    </script>
+}
+
+@* Estilo de la pagina *@
 <style>
     .card {
         border: 1px solid #ddd;
@@ -80,25 +95,25 @@
         }
 
     .btn-carrito {
-        background-color: #28a745; /* Verde más intenso */
+        background-color: #28a745;
         border: 1px solid #28a745;
-        border-radius: 8px; /* Aumenta el radio para hacerlo más redondeado */
-        padding: 12px 16px; /* Aumenta el padding para hacerlo más grande */
+        border-radius: 8px;
+        padding: 12px 16px; 
         display: inline-flex;
         align-items: center;
         text-decoration: none;
-        position: absolute; /* Posicionamiento absoluto */
-        bottom: 10px; /* Distancia desde la parte inferior */
-        right: 10px; /* Distancia desde la derecha */
+        position: absolute;
+        bottom: 10px; 
+        right: 10px; 
     }
 
     .carrito-icono {
-        width: 30px; /* Aumenta el tamaño de la imagen */
+        width: 30px; 
         height: 30px;
     }
 
     .text-center {
-        position: relative; /* Necesario para el posicionamiento absoluto del botón */
-        padding-bottom: 50px; /* Añade espacio para el botón */
+        position: relative; 
+        padding-bottom: 50px; 
     }
 </style>

@@ -9,6 +9,7 @@ public partial class Repuesto
     public int Id { get; set; }
 
     [Display(Name = "Repuesto")]
+    [Required(ErrorMessage = "El Nombre del Repuesto es obligatorio.")]
     public string? NombreRepuesto { get; set; } = null!;
 
     [Display(Name = "Vendedor")]
@@ -25,6 +26,7 @@ public partial class Repuesto
 
 
     [Display(Name = "Compatible con")]
+    [Required(ErrorMessage = "La Compatibilidad es obligatoria.")]
     public string Compatiblilidad { get; set; } = null!;
 
 
@@ -34,6 +36,7 @@ public partial class Repuesto
 
 
     [Display(Name = "Procedencia")]
+    [Required(ErrorMessage = "La Procedencia es obligatoria.")]
     public string Proveniencia { get; set; } = null!;
 
     [Display(Name = "Estado Fisico")]
@@ -44,8 +47,8 @@ public partial class Repuesto
     [Required(ErrorMessage = "El precio es obligatorio.")]
     public decimal? Precio { get; set; }
 
-    [Display(Name = "Duración de oferta")]
-    [Required(ErrorMessage = "La duración de oferta es obligatoria.")]
+    [Display(Name = "Fecha de publicación")]
+    [Required(ErrorMessage = "La Fecha de publicación es obligatoria.")]
     public DateTime? FechaRp { get; set; }
 
     [Display(Name = "Existencia")]
@@ -55,7 +58,7 @@ public partial class Repuesto
     [Display(Name = "Estado")]
     public byte? Actividad { get; set; }
 
-    [Display(Name = "Comentario")]
+    [Display(Name = "Motivo de la Venta")]
     public string? ComentarioR { get; set; }
 
     public virtual ICollection<DetalleVenta>? DetalleVenta { get; set; } = new List<DetalleVenta>();
